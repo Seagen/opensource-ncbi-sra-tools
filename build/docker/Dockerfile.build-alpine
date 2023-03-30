@@ -1,4 +1,4 @@
-FROM alpine:latest AS build
+FROM alpine:3.17.3 AS build
 RUN apk add build-base util-linux linux-headers g++ ninja cmake git libquadmath
 RUN ln -fs /usr/lib/libquadmath.so.0.0.0 /usr/lib/libquadmath.so
 
@@ -30,7 +30,7 @@ RUN mkdir -p /root/.ncbi
 RUN printf '/LIBS/IMAGE_GUID = "%s"\n' `uuidgen` > /root/.ncbi/user-settings.mkfg && \
     printf '/libs/cloud/report_instance_identity = "true"\n' >> /root/.ncbi/user-settings.mkfg
 
-FROM alpine:latest
+FROM alpine:3.17.3
 LABEL author="Kenneth Durbrow" \
       maintainer="kenneth.durbrow@nih.gov" \
       vendor="NCBI/NLM/NIH" \
